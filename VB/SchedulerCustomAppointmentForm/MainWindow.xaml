@@ -1,0 +1,60 @@
+﻿<!--region #xaml_main-->
+<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduler" x:Class="WpfApplication1.MainWindow"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <!--region #xaml_event-->
+        <dxsch:SchedulerControl x:Name="Scheduler" EditAppointmentFormShowing="Scheduler_EditAppointmentFormShowing" FormCustomizationUsingMVVMLocal="False"
+                                ActiveViewType="Week" GroupType="None">
+        <!--endregion #xaml_event-->
+            <dxsch:SchedulerControl.WeekView>
+                <dxsch:WeekView ResourcesPerPage="3"/>
+            </dxsch:SchedulerControl.WeekView>
+            <dxsch:SchedulerControl.Storage>
+                <dxsch:SchedulerStorage>
+                    <dxsch:SchedulerStorage.AppointmentStorage>
+                        <dxsch:AppointmentStorage DataSource = "CarScheduling" ResourceSharing="True">
+                            <dxsch:AppointmentStorage.Mappings>
+                            <dxsch:AppointmentMapping  
+                           AllDay="AllDay" 
+                           AppointmentId="UniqueId" 
+                           Start="StartDate" 
+                           End="EndDate" 
+                           Subject="Subject" 
+                           Description="Description" 
+                           ResourceId="ResourceIDs" 
+                           Label="Label" 
+                           Location="Location" 
+                           ReminderInfo="ReminderInfo" 
+                           Status="Status" 
+                           Type="Type" />
+                            </dxsch:AppointmentStorage.Mappings>
+                            <!--region #xaml_mappings-->
+                            <dxsch:AppointmentStorage.CustomFieldMappings>
+                                <dxsch:SchedulerCustomFieldMapping 
+                                    Member="CustomField1" 
+                                    Name="Contact" 
+                                    ValueType="String"/>
+                            </dxsch:AppointmentStorage.CustomFieldMappings>
+                            <!--endregion #xaml_mappings-->
+                        </dxsch:AppointmentStorage>
+                    </dxsch:SchedulerStorage.AppointmentStorage>
+                    <dxsch:SchedulerStorage.ResourceStorage>
+                        <dxsch:ResourceStorage DataSource="{Binding}">
+                            <dxsch:ResourceStorage.Mappings>
+                                <dxsch:ResourceMapping  
+                            Caption="ResourceName" 
+                            Color="Color" 
+                            Id="ResourceID" 
+                            Image="Image" />
+                            </dxsch:ResourceStorage.Mappings>
+                            </dxsch:ResourceStorage>
+                    </dxsch:SchedulerStorage.ResourceStorage>
+                </dxsch:SchedulerStorage>
+            </dxsch:SchedulerControl.Storage>
+        </dxsch:SchedulerControl>
+    </Grid>
+</Window>
+<!-- endregion #xaml_main-->
